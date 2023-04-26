@@ -8,23 +8,41 @@ import null as null
 import pytest
 
 
+def number_determine(n):
+    if not (isinstance(n, int) or isinstance(n, float)):
+        return "参数为非数字"
+    elif n > 99 or n < -99:
+        return "参数超出-99至99范围"
+    return "符合条件"
+
+
+def number_two(a, b):
+    # 测试步骤
+    if number_determine(a) == "符合条件":
+        if number_determine(b) == "符合条件":
+            return a + b
+        else:
+            return f"[b]{number_determine(b)}"
+    else:
+        return f"[a]{number_determine(a)}"
+
 @pytest.mark.parametrize(
     "a,b,expected",
     [
-        [null, null, "参数为非数字"],
-        [null, 25, "参数为非数字"],
-        [25, null, "参数为非数字"],
-        ["m", 25, "参数为非数字"],
-        [25, "m", "参数为非数字"],
+        [null, null, "[a]参数为非数字"],
+        [null, 25, "[a]参数为非数字"],
+        [25, null, "[b]参数为非数字"],
+        ["m", 25, "[a]参数为非数字"],
+        [25, "m", "[b]参数为非数字"],
         [25, 25, 50],
         [25, 99, 124],
         [99, 25, 124],
         [-25, -99, -124],
         [-99, -25, -124],
-        [25, 100, "参数超出-99至99范围"],
-        [100, 25, "参数超出-99至99范围"],
-        [-25, -100, "参数超出-99至99范围"],
-        [-100, -25, "参数超出-99至99范围"],
+        [25, 100, "[b]参数超出-99至99范围"],
+        [100, 25, "[a]参数超出-99至99范围"],
+        [-25, -100, "[b]参数超出-99至99范围"],
+        [-100, -25, "[a]参数超出-99至99范围"],
         [25, 98, 123],
         [98, 25, 123],
         [-25, -98, -123],
@@ -50,24 +68,6 @@ import pytest
          "a is min Boundary"
          ]
 )
-def number_determine(n):
-    if not (isinstance(n, int) or isinstance(n, float)):
-        return "参数为非数字"
-    elif n > 99 or n < -99:
-        return "参数超出-99至99范围"
-    return "符合条件"
-
-
-def number_two(a, b):
-    # 测试步骤
-    if number_determine(a) == "符合条件":
-        if number_determine(b) == "符合条件":
-            return a + b
-        else:
-            return f"[b]{number_determine(b)}"
-    else:
-        return f"[a]{number_determine(a)}"
-
 
 def test_number_add(a, b, expected):
     # 测试步骤
