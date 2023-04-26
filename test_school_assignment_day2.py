@@ -9,6 +9,7 @@ import pytest
 
 
 def number_determine(n):
+    # 条件判断
     if not (isinstance(n, int) or isinstance(n, float)):
         return "参数为非数字"
     elif n > 99 or n < -99:
@@ -17,7 +18,7 @@ def number_determine(n):
 
 
 def number_two(a, b):
-    # 测试步骤
+    # 相加
     if number_determine(a) == "符合条件":
         if number_determine(b) == "符合条件":
             return a + b
