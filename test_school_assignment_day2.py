@@ -7,6 +7,17 @@
 import null as null
 import pytest
 
+# 在调用每个测试函数之前打印【开始计算】在调用测试函数之后打印【结束计算】
+# 调用完所有的测试用例最终输出【结束测试】
+
+def setup_function():
+    print("开始计算")
+
+def teardown_function():
+    print("结束计算")
+
+def teardown_module():
+    print("结束测试")
 
 def number_determine(n):
     # 条件判断
